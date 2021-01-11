@@ -143,4 +143,75 @@ _base setMarkerSize [20, 20];
 // now calc best attack vector 
 // ---
 
-// next: get ASL of a map position - i.e. NOT an object 
+/*
+We want to check for ASL for each point to build up a battleplan 
+*/
+
+_originASL = getTerrainHeightASL _originPos;
+_destASL = getTerrainHeightASL _destPos;
+
+// mainline 
+_mainLinePoint1 = getTerrainHeightASL _pointA1;
+_mainLinePoint2 = getTerrainHeightASL _pointA2;
+
+// alt1 
+_alt1LinePoint1 = getTerrainHeightASL _azimuthAlt1;
+_alt1LinePoint2 = getTerrainHeightASL _pointAltCheckpoint1;
+
+// alt 2
+_alt2LinePoint1 = getTerrainHeightASL _azimuthAlt2;
+_alt2LinePoint2 = getTerrainHeightASL _pointAltCheckpoint2;
+
+systemChat format ["Starting ASL: %1", _originASL];
+systemChat format ["Target ASL: %1", _destASL];
+systemChat format ["RED Direct Line ASL Point 1: %1", _mainLinePoint1];
+systemChat format ["RED Direct Line ASL Point 2: %1", _mainLinePoint2];
+systemChat format ["GREEN Alt1 Line ASL Point 1: %1", _alt1LinePoint1];
+systemChat format ["GREEN Alt1 Line ASL Point 2: %1", _alt1LinePoint2];
+systemChat format ["BLUE Alt2 Line ASL Point 1: %1", _alt2LinePoint1];
+systemChat format ["BLUE Alt2 Line ASL Point 2: %1", _alt2LinePoint2];
+
+// obs 
+systemChat "Observations";
+_diff = _originASL - _destASL;
+if (_diff > 0) then {
+	systemChat format ["Origin Point is %1 higher than Target Point", _diff];
+} else {
+	systemChat format ["Origin Point is %1 Lower than Target Point", _diff];
+};
+
+systemChat "There are three calculated staging points";
+
+_redStaging = _mainLinePoint2 - _destASL;
+_greenStaging = _alt1LinePoint2 - _destASL;
+_blueStaging = _alt2LinePoint2 - _destASL;
+
+if (_redStaging > 0) then {
+	systemChat format ["Red Staging Point is %1 higher than Target Point", _redStaging];
+} else {
+	systemChat format ["Red Staging Point is not suitable, as it is %1 Lower than the Target Point", _redStaging];
+};
+
+if (_greenStaging > 0) then {
+	systemChat format ["Green Staging Point is %1 higher than Target Point", _greenStaging];
+} else {
+	systemChat format ["Green Staging Point is not suitable, as it is %1 Lower than the Target Point", _greenStaging];
+};
+
+if (_blueStaging > 0) then {
+	systemChat format ["Blue Staging Point is %1 higher than Target Point", _blueStaging];
+} else {
+	systemChat format ["Blue Staging Point is not suitable, as it is %1 Lower than the Target Point", _blueStaging];
+};
+
+// pop smoke to view staging areas 
+_originSmoke = "SmokeShell" createVehicle _originPos;
+_redSmoke1 = "SmokeShellRed" createVehicle _pointA1;
+_redSmoke2 = "SmokeShellRed" createVehicle _pointA2;
+_greenSmoke2 = "SmokeShellGreen" createVehicle _azimuthAlt1;
+_greenSmoke2 = "SmokeShellGreen" createVehicle _pointAltCheckpoint1;
+_blueSmoke2 = "SmokeShellBlue" createVehicle _azimuthAlt2;
+_blueSmoke2 = "SmokeShellBlue" createVehicle _pointAltCheckpoint2;
+_targetSmoke = "SmokeShellPurple" createVehicle _destPos;
+
+
