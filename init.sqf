@@ -214,4 +214,15 @@ _blueSmoke2 = "SmokeShellBlue" createVehicle _azimuthAlt2;
 _blueSmoke2 = "SmokeShellBlue" createVehicle _pointAltCheckpoint2;
 _targetSmoke = "SmokeShellPurple" createVehicle _destPos;
 
+sleep 30;
+// pop smoke to view staging areas 
+_originSmoke = "SmokeShell" createVehicle _originPos;
+_redSmoke1 = "SmokeShellRed" createVehicle _pointA1;
+_redSmoke2 = "SmokeShellRed" createVehicle _pointA2;
+_greenSmoke2 = "SmokeShellGreen" createVehicle _azimuthAlt1;
+_greenSmoke2 = "SmokeShellGreen" createVehicle _pointAltCheckpoint1;
+_blueSmoke2 = "SmokeShellBlue" createVehicle _azimuthAlt2;
+_blueSmoke2 = "SmokeShellBlue" createVehicle _pointAltCheckpoint2;
+_targetSmoke = "SmokeShellPurple" createVehicle _destPos;
+
 
