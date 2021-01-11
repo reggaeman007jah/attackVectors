@@ -24,17 +24,17 @@ _base setMarkerAlpha 0.5;
 
 // get distance 
 _meters = _originPos distance _destPos;
-systemChat format ["Patrol destination is %1 m away", _meters];
+// systemChat format ["Patrol destination is %1 m away", _meters];
 // this ^^ gets distance between origin andd destination 
 
 // get dir of dest 
 _azimuth = _originPos getDir _destPos;
-systemChat format ["Patrol Dest at at %1 degrees", _azimuth];
+// systemChat format ["Patrol Dest at at %1 degrees", _azimuth];
 // this ^^ gets heading of dest from origin 
 
 // divide dist by 3 to get checkpoints 
 _checkpointDist = _meters / 3;
-systemChat format ["Checkpoints are every %1 m", _checkpointDist];
+// systemChat format ["Checkpoints are every %1 m", _checkpointDist];
 // this ^^ divides distance into three, to enable equal segments to measure 
 
 // main column alt points 
@@ -62,14 +62,14 @@ _base setMarkerSize [20, 20];
 // stage 2 - calc alt vectors 
 // -------------
 
-sleep 1;
+// sleep 1;
 
 // Alt1 Column Heading
 _dir = _azimuth - 90;
 if (_dir < 0) then {
 	_dir = _dir + 360;
 };
-systemChat format ["Alt 1 pos heading: %1", _dir];
+// systemChat format ["Alt 1 pos heading: %1", _dir];
 // this calcs the relative heading -90 from mainline vector 
 
 // Alt2 Column Heading
@@ -77,7 +77,7 @@ _dir2 = _azimuth + 90;
 if (_dir2 < 0) then {
 	_dir2 = _dir2 + 360;
 };
-systemChat format ["Alt 2 pos heading: %1", _dir2];
+// systemChat format ["Alt 2 pos heading: %1", _dir2];
 // this calcs the relative heading +90 from mainline vector 
 
 // get Alt1 pos and make alt1 marker  
@@ -142,3 +142,5 @@ _base setMarkerSize [20, 20];
 // destination 
 // now calc best attack vector 
 // ---
+
+// next: get ASL of a map position - i.e. NOT an object 
